@@ -29,6 +29,230 @@ body {
     height: 100vh;
 }
 
+/* login----page  */
+
+.login-container {
+    height: fit-content;
+    background: linear-gradient(#18181d, #050505);
+    z-index: 0;
+}
+
+.login-container-1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    background: #121212;
+    height: 13%;
+    padding: 30px;
+    gap: 10px;
+    z-index: 1;
+}
+
+.login-container-1 img {
+    width: 50px;
+}
+
+.login-container-2 {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-top: 3%;
+}
+
+.login-container-2 .login-container-2-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(#050505, #18181d);
+    width: 50%;
+    border-radius: 5px;
+    padding: 20px;
+    z-index: 1;
+    align-content: center;
+    align-items: center;
+}
+
+.login-container hr {
+    color: white;
+    margin: 10px 100px;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    border-image: initial;
+    border-top: 1px solid rgb(41, 41, 41);
+    width: 80%;
+}
+
+.login-box {
+    position: relative;
+    width: 407px;
+    height: 455px;
+    background: transparent;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 0 10 rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+h2 {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 310px;
+    margin: 30px 0;
+    border-bottom: 1px solid #fff;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #fff;
+    padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    color: #fff;
+    transform: translateY(-50%);
+}
+
+input::file-selector-button {
+    background-image: linear-gradient(to right,
+            /* #ff7a18, */
+            #af002d,
+            /* #319197 100%, */
+            hsl(0, 97%, 40%) 200%);
+    background-position-x: 0%;
+    background-size: 200%;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    padding: 1rem 1.25rem;
+    text-shadow: 0 1px 1px #333;
+    transition: all 0.25s;
+    margin-right: 3rem;
+}
+
+input::file-selector-button:hover {
+    background-position-x: 100%;
+    transform: scale(1.1);
+}
+
+.remember-forgot {
+    margin: -15px 0 15px;
+    font-size: .9em;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.remember-forgot label input {
+    margin-right: 3px;
+}
+
+.remember-forgot label input:checked {
+    background-color: hsl(0, 61%, 44%);
+}
+
+.remember-forgot a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+button {
+    width: 80%;
+    height: 40px;
+    background-color: hsl(0, 61%, 44%);
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #000;
+    font-weight: 500;
+}
+
+.register-link {
+    font-size: .9em;
+    color: #fff;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+
+.register-link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width:500px) {
+    .login-box {
+        width: 100%;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+    }
+
+    .input-box {
+        width: 290px;
+    }
+}
+
+.landing-footer {
+    color: white;
+    margin-top: 5%;
+    height: 10%;
+    background: linear-gradient(#050505, #18181d);
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    z-index: 1;
+    justify-content: center;
+    /* position: absolute; */
+    /* bottom: 0; */
+    width: 100%;
+}
+
+/* finish of login page  */
 .container {
     display: grid;
     grid-template-columns: 25rem 50rem auto;
@@ -140,18 +364,18 @@ body {
     display: flex;
     align-items: center;
     flex-direction: row;
-    color:  #6a6a6a;
+    color: #6a6a6a;
 }
 
 .library-likedsongs img {
     width: 50px;
     border-radius: 5%;
 }
- 
+
 /* second components  */
 
 .secondcompo {
-    background-color:#121212;
+    background-color: #121212;
     color: white;
     padding: 10px;
     height: auto;

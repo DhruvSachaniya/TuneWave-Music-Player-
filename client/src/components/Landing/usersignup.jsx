@@ -1,16 +1,17 @@
 import { useState } from "react";
-import axios from "axios"
 import LandingFooter from "./LandingFooter";
+import axios from "axios";
 import toast from "react-hot-toast";
 
-export default function LoginPage() {
-
+export default function UserSignUpPage() {
+    
     const [values, setvalue] = useState({
+        username: "",
         email: "",
         password: ""
-    });
+    })
 
-    function handlechange(event) {
+    const handlechange = (event) => {
         const { name, value } = event.target;
 
         setvalue({
@@ -19,23 +20,22 @@ export default function LoginPage() {
         })
     }
 
-    async function handlesumbit(event) {
+    const  handlesubmit = async (event) => {
         event.preventDefault();
 
         const response = await axios({
-            url: "auth/login",
+            url: "auth/signup/user",
             method: "post",
             headers: {
                 "Content-Type": "application/json"
             },
             data: JSON.stringify({
-                username: values.email,
-                password: values.password
+                values
             })
         })
 
-        if (response.status === 201) {
-            toast('Login sucessfully!',
+        if(response.status === 201) {
+            toast('usersignup sucessfully!',
                 {
                     icon: '👏',
                     style: {
@@ -45,11 +45,9 @@ export default function LoginPage() {
                     },
                 }
             );
-            localStorage.setItem("jwt_token", response.data.token);
-            localStorage.setItem("role", response.data.role);
         }
     }
-
+    
     return (
         <div className="login-container">
             <div className="login-container-1">
@@ -58,10 +56,18 @@ export default function LoginPage() {
             </div>
             <div className="login-container-2">
                 <div className="login-container-2-div">
-                    <h1 style={{ fontSize: "2em", margin: "48px 0px" }}>Login to music-Player</h1>
+                    <h1 style={{ fontSize: "2em", margin: "48px 0px" }}>Sign up to start listening</h1>
                     <hr />
-                    <form onSubmit={handlesumbit}>
+                    <form onSubmit={handlesubmit}>
                         <div className="login-box">
+                            <div class="input-box">
+                                <span class="material-symbols-sharp icon">
+                                    person
+                                </span>
+                                <input name="username" value={values.username} onChange={handlechange} type="text" required />
+                                <label>username</label>
+                            </div>
+
                             <div class="input-box">
                                 <span class="material-symbols-sharp icon">
                                     mail
@@ -82,14 +88,15 @@ export default function LoginPage() {
                                 <label><input type="checkbox" /> Remember me</label>
                             </div>
 
-                            <button type="submit">Login</button>
+                            <button type="submit">Sign up</button>
 
                         </div>
                     </form>
                     <hr style={{ width: "80%" }} />
 
                     <div class="register-link">
-                        <p>Don't have an account? <a href="/#">Register</a></p>
+                        <p>Already have an account?  <a href="/login">Log in here.</a></p>
+                        <p style={{ marginTop: "3px"}}>Signup for Artist account?  <a href="/usersignup">Register</a></p>
                     </div>
                 </div>
             </div>

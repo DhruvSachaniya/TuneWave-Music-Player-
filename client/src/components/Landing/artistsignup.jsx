@@ -1,14 +1,21 @@
 import { useState } from "react";
-import axios from "axios"
 import LandingFooter from "./LandingFooter";
+import axios from "axios";
 import toast from "react-hot-toast";
 
-export default function LoginPage() {
-
+export default function ArtistSignupPage() {
+    
     const [values, setvalue] = useState({
+        username: "",
         email: "",
         password: ""
-    });
+    })
+
+    const [imagefile, setfile] = useState();
+
+    const getimage = (e) => {
+        setfile(e.target.files[0]);
+    }
 
     function handlechange(event) {
         const { name, value } = event.target;
@@ -22,20 +29,24 @@ export default function LoginPage() {
     async function handlesumbit(event) {
         event.preventDefault();
 
-        const response = await axios({
-            url: "auth/login",
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            data: JSON.stringify({
-                username: values.email,
-                password: values.password
-            })
-        })
+        const formdata = new FormData();
+        formdata.append("username", values.username);
+        formdata.append("email", values.email);
+        formdata.append("image", imagefile);
+        formdata.append("password", values.password);
 
-        if (response.status === 201) {
-            toast('Login sucessfully!',
+        try {
+            const response = await axios({
+                url: "auth/signup/artist",
+                method: "post",
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                data: formdata
+            })
+
+            if(response.status === 201) {
+                toast('artistsignup sucessfully!',
                 {
                     icon: '👏',
                     style: {
@@ -45,9 +56,11 @@ export default function LoginPage() {
                     },
                 }
             );
-            localStorage.setItem("jwt_token", response.data.token);
-            localStorage.setItem("role", response.data.role);
+            }
+        } catch(error) {
+            console.log(error);
         }
+
     }
 
     return (
@@ -58,16 +71,34 @@ export default function LoginPage() {
             </div>
             <div className="login-container-2">
                 <div className="login-container-2-div">
-                    <h1 style={{ fontSize: "2em", margin: "48px 0px" }}>Login to music-Player</h1>
+                    <h1 style={{ fontSize: "2em", margin: "48px 0px" }}>Sign up to create music</h1>
                     <hr />
                     <form onSubmit={handlesumbit}>
-                        <div className="login-box">
+                        <div className="login-box" style={{ gap: "0"}}>
+                            <div class="input-box">
+                                <span class="material-symbols-sharp icon">
+                                    person
+                                </span>
+                                <input name="username" value={values.username} onChange={handlechange} type="text" required />
+                                <label>username</label>
+                            </div>
+
                             <div class="input-box">
                                 <span class="material-symbols-sharp icon">
                                     mail
                                 </span>
                                 <input name="email" value={values.email} onChange={handlechange} type="email" required />
                                 <label>Email</label>
+                            </div>
+
+                            <div style={{ marginRight: "4rem"}}>
+                                <input
+                                    className="inputfile"
+                                    type="file"
+                                    accept="image/*"
+                                    name="image"
+                                    onChange={getimage}
+                                />
                             </div>
 
                             <div class="input-box">
@@ -82,14 +113,15 @@ export default function LoginPage() {
                                 <label><input type="checkbox" /> Remember me</label>
                             </div>
 
-                            <button type="submit">Login</button>
+                            <button type="submit">Sign up</button>
 
                         </div>
                     </form>
                     <hr style={{ width: "80%" }} />
 
                     <div class="register-link">
-                        <p>Don't have an account? <a href="/#">Register</a></p>
+                        <p>Already have an account?  <a href="/login">Log in here.</a></p>
+                        <p style={{ marginTop: "3px" }}>Signup for Artist account?  <a href="/usersignup">Register</a></p>
                     </div>
                 </div>
             </div>
