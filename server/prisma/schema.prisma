@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int             @id @default(autoincrement())
+  name          String?
+  email         String          @unique
+  password      String
+  role          UserRole
+  User_Playlist User_Playlist[]
+  Liked_songs   Liked_songs[]
+}
+
+model Artist {
+  id              Int               @id @default(autoincrement())
+  name            String?
+  email           String            @unique
+  password        String
+  album_photo     String
+  role            UserRole
+  Music           Music[]
+  Artist_Playlist Artist_Playlist[]
+  Liked_songs     Liked_songs[]
+}
+
+model Music {
+  id             Int               @id @default(autoincrement())
+  ArtistId       Int
+  Artist         Artist            @relation(fields: [ArtistId], references: [id])
+  name           String
+  description    String
+  music_photo    String
+  audio_file     String
+  userplaylist   User_Playlist[]
+  artistplaylist Artist_Playlist[]
+  createdAt      DateTime          @default(now())
+}
+
+model User_Playlist {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  musics    Music[]
+  User_id   Int
+  User      User     @relation(fields: [User_id], references: [id])
+}
+
+model Artist_Playlist {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  musics    Music[]
+  ArtistId  Int
+  Artist    Artist   @relation(fields: [ArtistId], references: [id])
+}
+
+model Liked_songs {
+  id        Int      @id @default(autoincrement())
+  User_id   Int?
+  User      User?    @relation(fields: [User_id], references: [id])
+  ArtistId  Int?
+  Artist    Artist?  @relation(fields: [ArtistId], references: [id])
+  music     Json?
+  createdAt DateTime @default(now())
+}
+
+enum UserRole {
+  user
+  artist
+}
