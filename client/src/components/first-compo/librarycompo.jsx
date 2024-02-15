@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export default function LibrarySection() {
     return (
         <div className="librarysection">
@@ -44,6 +46,25 @@ export default function LibrarySection() {
                 </div>
             </div>
             {/* all playlist  */}
+            <div className="library-section-5">
+                <h3>Create your first playlist</h3>
+                <p>It's easy, we'll help you</p>
+                <button onClick={() => { 
+                    toast('Log in to create and share playlists.',
+                {
+                    icon: '👏',
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                }
+            );
+                 }}>Create Plyalist</button>
+            </div>
+            <div className="librarysection-2">
+                 <p>🌐English</p>
+            </div>
         </div>
     );
 }

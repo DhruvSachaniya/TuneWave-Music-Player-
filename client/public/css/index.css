@@ -23,7 +23,6 @@ img {
     border-radius: 8px;
 }
 
-html,
 body {
     background: linear-gradient(#050505, #18181d);
     height: 100vh;
@@ -253,139 +252,14 @@ button {
 }
 
 /* finish of login page  */
+
 .container {
     display: grid;
-    grid-template-columns: 25rem 50rem auto;
+    grid-template-columns: 25rem auto;
     gap: 10px;
+    max-height: 100vh;
     width: 100%;
     padding: 10px;
     position: relative;
-}
-
-/* first components home and search */
-
-.firstcompo {
-    display: flex;
-    flex-direction: column;
-    width: 25rem;
-}
-
-.homeandsearch {
-    background-color: #121212;
-    height: 8rem;
-    width: 25rem;
-    color: white;
-    font-weight: 700;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    border-radius: 5%;
-}
-
-.homeandsearch div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    margin-left: 20px;
-}
-
-/* library-------section */
-
-.librarysection {
-    background-color: #121212;
-    max-height: 100vh;
-    width: 25rem;
-    color: white;
-    font-weight: 700;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    gap: 20px;
-    border-radius: 5%;
-    margin-top: 10px;
-    padding: 20px;
-}
-
-.librarysection-1 {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.librarysection-1 div {
-    display: flex;
-    gap: 10px;
-}
-
-.librarysection-2 {
-    background-color: hsl(240, 6%, 16%);
-    border-radius: 9999px;
     overflow: hidden;
-    width: fit-content;
-    padding: 10px;
-    font-size: small;
-}
-
-.librarysection-3 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-left: 5px;
-}
-
-.librarysection-3 div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: smaller;
-}
-
-.librarysection-4 {
-    display: flex;
-}
-
-.librarysection-4 :hover {
-    background-color: #292929;
-    cursor: pointer;
-}
-
-.librarysection-4 .library-likedsongs {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    font-size: small;
-}
-
-.library-likedsongs-2 {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    color: #6a6a6a;
-}
-
-.library-likedsongs img {
-    width: 50px;
-    border-radius: 5%;
-}
-
-/* second components  */
-
-.secondcompo {
-    background-color: #121212;
-    color: white;
-    padding: 10px;
-    height: auto;
-    width: 50rem;
-    border-radius: 5px;
-}
-
-.firstsection {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
 }

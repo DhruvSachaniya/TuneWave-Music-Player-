@@ -6,9 +6,6 @@ export default function AppBase () {
         <div className="container">
             <FirstCompo/>
             <SecondCompo/>
-            <div className="div-3">
-                <h1>you</h1>
-            </div>
         </div>
     );
 }
