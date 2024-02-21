@@ -3,6 +3,18 @@
 :root {
     -text-fontcolor: #a7a7a7;
     -text-font2color: #6a6a6a;
+    --background-base: #121212;
+    --background-highlight: #1a1a1a;
+    --background-press: #000;
+    --background-elevated-base: #242424;
+    --background-elevated-highlight: #2a2a2a;
+    --background-elevated-press: #000;
+    --background-tinted-base: hsla(0,0%,100%,.07);
+    --background-tinted-highlight: hsla(0,0%,100%,.1);
+    --background-tinted-press: hsla(0,0%,100%,.04);
+    --background-unsafe-for-small-text-base: #121212;
+    --background-unsafe-for-small-text-highlight: #121212;
+    --background-unsafe-for-small-text-press: #121212;
 }
 
 * {
@@ -26,6 +38,7 @@ img {
 body {
     background: linear-gradient(#050505, #18181d);
     height: 100vh;
+    user-select: none;
 }
 
 /* login----page  */

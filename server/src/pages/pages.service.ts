@@ -301,5 +301,23 @@ export class pagesservice {
             data: { music: existingLikedSongs }
         });
     }
+
+    async getmusicbyId(musicId: any) :Promise<any> {
+        try {
+            const music = await this.prisma.music.findUnique({
+                where: {
+                    id: Number(musicId)
+                }
+            });
+
+            if(!music) {
+                throw new HttpException("didn't found music!", HttpStatus.NOT_FOUND);
+            }
+
+            return music;
+        } catch(error) {
+            throw new HttpException("failed to get music!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     
 }

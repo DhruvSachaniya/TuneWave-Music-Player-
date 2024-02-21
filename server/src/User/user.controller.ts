@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Patch, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Request, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/Auth/guard';
 import { UserService } from './user.service';
 import { musicdto, userplaylistdto } from './dto';
@@ -76,5 +76,14 @@ export class UserController {
         }
 
         return await this.userservice.deletefromplaylist(req.user, dto);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get("playlist/:playlistid")
+    async getplaylistbyid (
+        @Request() req,
+        @Param("playlistid") playlistid: number,
+    ) {
+        return await this.userservice.getplaylistbyid(playlistid);
     }
 }

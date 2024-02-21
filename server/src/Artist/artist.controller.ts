@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Patch, Post, Request, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post, Request, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ArtistService } from './artist.service';
 import { JwtAuthGuard } from 'src/Auth/guard';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
@@ -114,5 +114,14 @@ export class ArtistController {
         }
 
         return await this.artistservice.deletefromplaylist(req.user, dto);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get("playlist/:playlistid")
+    async getplaylistbyid (
+        @Request() req,
+        @Param("playlistid") playlistid: number,
+    ) {
+        return await this.artistservice.getplaylistbyid(playlistid);
     }
 }

@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     width: 25rem;
+    max-height: 100vh;
 }
 
 .homeandsearch {
@@ -17,6 +18,7 @@
     justify-content: center;
     gap: 20px;
     border-radius: 5%;
+    padding: 10px;
 }
 
 .homeandsearch div {
@@ -47,6 +49,37 @@
     border-radius: 5%;
     margin-top: 10px;
     padding: 20px;
+    /* overflow-y: auto; */
+}
+
+.library-scroll {
+    overflow-y: auto;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.librarysection::-webkit-scrollbar {
+    display:none;
+}
+
+.librarysection::-webkit-scrollbar {
+    width: 12px; 
+}
+
+
+.librarysection::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+
+.librarysection::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 6px; 
+}
+
+.librarysection::-webkit-scrollbar-thumb:hover {
+    background: #555; 
 }
 
 .librarysection-1 {
@@ -128,4 +161,66 @@
     background-color: white;
     margin-top: 1rem;
     width: 50%;
+}
+
+.create-playlist-overlay {
+    background-color: rgba(0,0,0,.7);
+    bottom: 0;
+    /* display: -webkit-box; */
+    /* display: -ms-flexbox; */
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    /* -webkit-box-align: center; */
+    /* -ms-flex-align: center; */
+    align-items: center;
+    /* -webkit-box-pack: center; */
+    /* -ms-flex-pack: center; */
+    justify-content: center;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.create-playlist-overlay-1 {
+    flex-direction: column;
+    background-color: #242424;
+    border-radius: 8px;
+    padding: 50px;
+}
+
+.overlay-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.create-playlist-overlay-3 {
+    margin-left: 2rem;
+}
+
+.search-input {
+    flex-grow: 1;
+    position: relative;
+}
+
+.search-input-icon {
+    position: absolute;
+    left: 8px;
+    /* top: 50%; */
+    color: #fff;
+    transform: translateY(+50%);
+}
+
+.search-input input {
+    background-color: #242424;
+    border: 0;
+    border-radius: 500px;
+    color: #fff!important;
+    height: 48px;
+    padding: 6px 36px;
+    text-overflow: ellipsis;
+    width: 100%;
 }

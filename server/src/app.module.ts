@@ -1,15 +1,21 @@
 import { Module } from '@nestjs/common';
 import { authmodule } from './Auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import { PagesController } from './pages/pages.controller';
 import { ArtistModule } from './artist/artist.module';
 import { UserModule } from './user/user.module';
 import { PagesModule } from './pages/pages.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true
-  }), authmodule, ArtistModule, UserModule, PagesModule],
+  }),
+  ServeStaticModule.forRoot({
+    rootPath: join(__dirname, "..", "uploads"),
+    serveRoot: "/uploads",
+  }),   
+  authmodule, ArtistModule, UserModule, PagesModule],
   providers: [],
   controllers: [],
 })

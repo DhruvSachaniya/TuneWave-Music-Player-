@@ -2,8 +2,11 @@ import { useState } from "react";
 import axios from "axios"
 import LandingFooter from "./LandingFooter";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+
+    const navigate = useNavigate();
 
     const [values, setvalue] = useState({
         email: "",
@@ -47,6 +50,8 @@ export default function LoginPage() {
             );
             localStorage.setItem("jwt_token", response.data.token);
             localStorage.setItem("role", response.data.role);
+
+            navigate("/");
         }
     }
 

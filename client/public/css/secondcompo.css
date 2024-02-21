@@ -21,6 +21,11 @@
 .firstsection-1 {
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+.firstsection-1 span {
+    cursor: not-allowed;
 }
 
 .firstsection-2 {

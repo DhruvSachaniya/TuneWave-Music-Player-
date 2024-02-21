@@ -210,4 +210,23 @@ export class UserService {
         }
     }
     
+    async getplaylistbyid(playlistid: number): Promise<any> {
+        try {
+            const playlist_data = await this.prisma.user_Playlist.findUnique({
+                where: {
+                    id: Number(playlistid)
+                }, include: {
+                    musics: true,
+                }
+            })
+
+            if(!playlist_data) {
+                throw new HttpException("not playlistt found!", HttpStatus.NOT_FOUND);
+            }
+
+            return playlist_data;
+        } catch(error) {
+            throw new HttpException(error || "error to finding palylistbyid!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
