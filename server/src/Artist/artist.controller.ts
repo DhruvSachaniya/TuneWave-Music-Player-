@@ -124,4 +124,12 @@ export class ArtistController {
     ) {
         return await this.artistservice.getplaylistbyid(playlistid);
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Get(":artistid")
+    async getartistbyid (
+        @Param("artistid") artistid: number
+    ) {
+        return await this.artistservice.getartistbyid(artistid);
+    }
 }

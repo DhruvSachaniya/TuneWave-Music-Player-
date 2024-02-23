@@ -96,7 +96,7 @@ export default function UserSignUpPage() {
 
                     <div class="register-link">
                         <p>Already have an account?  <a href="/login">Log in here.</a></p>
-                        <p style={{ marginTop: "3px"}}>Signup for Artist account?  <a href="/usersignup">Register</a></p>
+                        <p style={{ marginTop: "3px"}}>Signup for Artist account?  <a href="/artistsignup">Register</a></p>
                     </div>
                 </div>
             </div>

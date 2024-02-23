@@ -15,7 +15,7 @@ export default function PlaylistPage() {
                 const role = localStorage.getItem("role");
                 if (role === "user" || role === "artist") {
                     const res = await axios({
-                        url: role === "user" ? `user/playlist/${playlistId}` : `artist/playlist/${playlistId}`,
+                        url: role === "user" ? `/user/playlist/${playlistId}` : `/artist/playlist/${playlistId}`,
                         method: "get",
                         headers: {
                             "Authorization": "Bearer " + localStorage.getItem("jwt_token"),

@@ -7,6 +7,7 @@ import ArtistSignupPage from "./components/Landing/artistsignup";
 import SearchPage from "./components/search/SearchPage";
 import PlyalistPage from "./components/playlist-individual/playlistpage";
 import LikedSongPage from "./components/likedsong-individual/likedsongpage";
+import ArtistPage from "./components/artist-individual/ArtistPage";
 
 function App() {
   return (
@@ -15,11 +16,12 @@ function App() {
         <Routes>
           <Route path="/" element={<AppBase />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/usersignup" element={<UserSignUpPage/>}/>
-          <Route path="/artistsignup" element={<ArtistSignupPage/>}/>
-          <Route path="/search" element={<SearchPage/>}/>
-          <Route path="/:playlistId" element={<PlyalistPage/>}/>
-          <Route path="/likedsongs" element={<LikedSongPage/>} />
+          <Route path="/usersignup" element={<UserSignUpPage />} />
+          <Route path="/artistsignup" element={<ArtistSignupPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route exact path="/playlist/:playlistId" element={<PlyalistPage />} />
+          <Route path="/likedsongs" element={<LikedSongPage />} />
+          <Route exact path="/artist/:artistId" element={<ArtistPage />} />
         </Routes>
       </BrowserRouter>
       <Toaster

@@ -30,7 +30,7 @@ export default function ArtistSignupPage() {
         event.preventDefault();
 
         const formdata = new FormData();
-        formdata.append("username", values.username);
+        formdata.append("name", values.username);
         formdata.append("email", values.email);
         formdata.append("image", imagefile);
         formdata.append("password", values.password);
@@ -46,7 +46,7 @@ export default function ArtistSignupPage() {
             })
 
             if(response.status === 201) {
-                toast('artistsignup sucessfully!',
+                toast('artist signup sucessfully!',
                 {
                     icon: '👏',
                     style: {
@@ -54,7 +54,14 @@ export default function ArtistSignupPage() {
                         background: '#333',
                         color: '#fff',
                     },
-                }
+                },
+                setvalue({
+                    username: "",
+                    email: "",
+                    password: ""
+                }),
+                setfile(""),
+                window.location.reload()
             );
             }
         } catch(error) {
@@ -90,7 +97,6 @@ export default function ArtistSignupPage() {
                                 <input name="email" value={values.email} onChange={handlechange} type="email" required />
                                 <label>Email</label>
                             </div>
-
                             <div style={{ marginRight: "4rem"}}>
                                 <input
                                     className="inputfile"
@@ -100,6 +106,7 @@ export default function ArtistSignupPage() {
                                     onChange={getimage}
                                 />
                             </div>
+                            <p style={{ fontSize: "smaller", marginTop: "5px"}}>Note: Make sure That Image File Name can not containes *spaces*</p>
 
                             <div class="input-box">
                                 <span class="material-symbols-sharp icon">

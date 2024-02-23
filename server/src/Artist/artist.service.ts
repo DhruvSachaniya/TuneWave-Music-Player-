@@ -275,4 +275,24 @@ export class ArtistService {
             throw new HttpException(error || "error to finding palylistbyid!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    async getartistbyid(artistid: number) :Promise<any> {
+        try {
+            const findartistbyid = await this.prisma.artist.findUnique({
+                where: {
+                    id: Number(artistid)
+                }, include: {
+                    Music: true,
+                }
+            })
+
+            if(!findartistbyid) {
+                throw new HttpException("no artist found!", HttpStatus.NOT_FOUND);
+            }
+
+            return findartistbyid;
+        } catch(error) {
+            throw new HttpException(error || "eror to finding artistbyid!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 export default function SecondSection() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [vendordata, setVendorData] = useState(null);
+    const [allartistdata, setallartistData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function checkLogin() {
@@ -33,7 +36,7 @@ export default function SecondSection() {
                 const role = localStorage.getItem("role");
                 if (role === "user" || role === "artist") {
                     const res = await axios({
-                        url: role === "user" ? "user/details" : "artist/details",
+                        url: role === "user" ? "/user/details" : "/artist/details",
                         method: "GET",
                         headers: {
                             "Authorization": "Bearer " + localStorage.getItem("jwt_token"),
@@ -48,8 +51,29 @@ export default function SecondSection() {
             }
         }
         getVendorData();
-        console.log(vendordata);
+
     }, []);
+
+    useEffect(() => {
+        async function fetchtheallartist() {
+            if(isLoggedIn) {
+                try {
+                    const allartist = await axios({
+                        url: "/artist/all",
+                        method: "GET",
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem("jwt_token")
+                        }
+                    })
+                    setallartistData(allartist.data);
+                } catch(error) {
+                    console.log("failed to fecth the allartist", error.message);
+                }
+            }
+        }
+        fetchtheallartist();
+        // console.log(allartistdata);
+    }, [vendordata])
 
     return (
         <>
@@ -97,17 +121,25 @@ export default function SecondSection() {
             ) : (
                 <div className="secondsection">
                     <div className="secondsection-1">
-                        <h3>Made For </h3>
+                        {vendordata ? (
+                            <h3>Made For {vendordata.name}</h3>
+                        ): null}
                         <h3 style={{ color: "gray" }}>show all</h3>
                     </div>
                     <div className="secondsection-2">
-                        <div className="secondsection-2-card">
+                    {allartistdata && allartistdata.length > 0 ? (
+                        allartistdata.map((playlist) => (
+                        <div className="secondsection-2-card" key={playlist.id} 
+                            onClick={ () => {navigate(`/artist/${playlist.id}`)}}
+                        >
                             <div>
-                                <img style={{ width: "150px" }} src="https://misc.scdn.co/liked-songs/liked-songs-300.png" alt="liked_song" />
+                                <img src={`http://localhost:3333/uploads/artist_photos/${playlist.album_photo}`} alt="liked_song" />
                             </div>
-                            <p>title</p>
+                            <p>{playlist.name}</p>
                             <p style={{ fontSize: "smaller", color: "#a7a7a7" }}>description</p>
                         </div>
+                        ))
+                    ) : null}
                         <div className="secondsection-2-card">
                             <img style={{ width: "150px" }} src="https://misc.scdn.co/liked-songs/liked-songs-300.png" alt="liked_song" />
                             <p>title</p>

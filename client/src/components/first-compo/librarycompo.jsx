@@ -40,9 +40,9 @@ export default function LibrarySection() {
             try {
                 let url = "";
                 if (role === "user") {
-                    url = "user/details";
+                    url = "/user/details";
                 } else if (role === "artist") {
-                    url = "artist/details";
+                    url = "/artist/details";
                 }
                 if (url) {
                     const response = await axios({
@@ -136,7 +136,7 @@ export default function LibrarySection() {
                     <>
                         {vendordata.Artist_Playlist.map((playlist) => (
                             <div className="librarysection-4" key={playlist.id} onClick={() => {
-                                navigate(`/${playlist.id}`);
+                                navigate(`/playlist/${playlist.id}`);
                             }}>
                                 <div className="library-likedsongs">
                                     <div>
