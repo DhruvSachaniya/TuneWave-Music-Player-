@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function AccountWindow() {
-    
+    const navigate = useNavigate();
+
     async function handlelogout () {
         localStorage.removeItem("jwt_token");
         window.location.reload();
@@ -7,7 +10,7 @@ export default function AccountWindow() {
     
     return(
         <div className="profile-mini-cart">
-            <div className="profile-mini-cart-1">
+            <div className="profile-mini-cart-1" onClick={() => { navigate("/account-overview")}}>
                 <p> Account </p>
                 <i class="fa-solid fa-arrow-up-right-from-square fa-bounce"></i>
             </div>

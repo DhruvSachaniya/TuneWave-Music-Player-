@@ -37,7 +37,7 @@ img {
 
 body {
     background: linear-gradient(#050505, #18181d);
-    height: 100vh;
+    /* height: 100vh; */
     user-select: none;
 }
 
