@@ -1,13 +1,14 @@
+import React, { useState, useRef, useEffect } from 'react';
 import MusicPlayer from "../Music-player/MusicPlayer";
 import FirstCompo from "../first-compo/fiirstcompo";
 import SecondCompo from "../second-compo/secondcompo";
 
-export default function AppBase () {
-    return(
+export default function AppBase() {
+    return (
         <div className="container">
-            <FirstCompo/>
-            <SecondCompo/>
-            <MusicPlayer/>
+            <FirstCompo />
+            <SecondCompo />
+            <MusicPlayer />
         </div>
     );
 }

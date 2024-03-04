@@ -52,7 +52,7 @@ export default function SecondSection() {
         }
         getVendorData();
 
-    }, []);
+    }, [vendordata]);
 
     useEffect(() => {
         async function fetchtheallartist() {

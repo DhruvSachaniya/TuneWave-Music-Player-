@@ -167,8 +167,12 @@
 
 
 import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-export default function MusicPlayer({ audioFiles }) {
+export default function MusicPlayer() {
+
+    const count = useSelector(state => state.counterList.value);
+    const [musicData, setMusicData] = useState([]);
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(0.5);
@@ -177,10 +181,15 @@ export default function MusicPlayer({ audioFiles }) {
     const audioRef = useRef(null);
 
     useEffect(() => {
-        if (audioFiles && audioFiles.length > 0) {
-            loadTrack(audioFiles[currentTrackIndex]);
+        const audioFile = count.map(item => "http://localhost:3333/uploads/audio_file/" + item.audio_file);
+        setMusicData(audioFile);
+    }, [count]);
+
+    useEffect(() => {
+        if (musicData && musicData.length > 0) {
+            loadTrack(musicData[currentTrackIndex]);
         }
-    }, [audioFiles, currentTrackIndex]);
+    }, [musicData, currentTrackIndex]);
 
     const loadTrack = (audioFile) => {
         audioRef.current.src = audioFile;
@@ -188,7 +197,7 @@ export default function MusicPlayer({ audioFiles }) {
     };
 
     const playNextTrack = () => {
-        if (currentTrackIndex < audioFiles.length - 1) {
+        if (currentTrackIndex < musicData.length - 1) {
             setCurrentTrackIndex(currentTrackIndex + 1);
         }
     };
@@ -224,7 +233,7 @@ export default function MusicPlayer({ audioFiles }) {
     };
 
     const handleEnded = () => {
-        if (currentTrackIndex < audioFiles.length - 1) {
+        if (currentTrackIndex < musicData.length - 1) {
             playNextTrack();
         } else {
             setIsPlaying(true);
@@ -238,6 +247,12 @@ export default function MusicPlayer({ audioFiles }) {
             audioRef.current.pause();
         }
     }, [isPlaying]);
+
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
 
     return (
         <div className="music-player">
@@ -277,9 +292,9 @@ export default function MusicPlayer({ audioFiles }) {
                     </div>
                 </div>
                 <div className="slider_container">
-                    <div className="current-time">{currentTime}</div>
+                    <div className="current-time">{formatTime(currentTime)}</div>
                     <input type="range" min="0" max={duration} value={currentTime} className="seek_slider" onChange={handleSeek} />
-                    <div className="total-duration">{duration}</div>
+                    <div className="total-duration">{formatTime(duration)}</div>
                 </div>
             </div>
             <div style={{

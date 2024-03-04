@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import MusicPlayer from "../Music-player/MusicPlayer";
+import { useDispatch, useSelector } from "react-redux";
+import { addSongsforMusicPlayer } from "../../redux/redux-files/counterlist";
 
 export default function ArtistPage() {
 
@@ -12,6 +14,9 @@ export default function ArtistPage() {
     const [artistdata, setartistData] = useState(null);
     const [countartistsongs, setcountartistsongs] = useState(0);
     const [artistimage, setartistimage] = useState("");
+
+    const count = useSelector(state => state.counterList.value)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         async function fetchartistdata() {
@@ -81,7 +86,7 @@ export default function ArtistPage() {
                                     <div className="playlist-line" />
                                     {artistdata && artistdata.Music.length > 0 ? (
                                         artistdata.Music.map((playlist, index) => (
-                                            <div className="playlist-song-area-2" key={playlist.id}>
+                                            <div className="playlist-song-area-2" key={playlist.id} onClick={() => dispatch(addSongsforMusicPlayer(artistdata.Music))}>
                                                 <div>{index + 1}</div>
                                                 <div className="library-likedsongs playlist-song-list">
                                                     <div>

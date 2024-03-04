@@ -4,6 +4,7 @@ import Footer from "../Footer/Footer";
 import FirstSection from "../second-compo/firstsection";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import MusicPlayer from "../Music-player/MusicPlayer";
 
 export default function PlaylistPage() {
     const { playlistId } = useParams();
@@ -85,6 +86,7 @@ export default function PlaylistPage() {
                 {/* Render playlist content here */}
                 <Footer />
             </div>
+            <MusicPlayer/>
         </div>
     );
 }
