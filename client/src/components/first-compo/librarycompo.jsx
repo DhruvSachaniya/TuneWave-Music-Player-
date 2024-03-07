@@ -161,7 +161,7 @@ export default function LibrarySection() {
                     <>
                         {vendordata.User_Playlist.map((playlist) => (
                             <div className="librarysection-4" key={playlist.id} onClick={() => {
-                                navigate(`/${playlist.id}`)
+                                navigate(`/playlist/${playlist.id}`)
                             }}>
                                 <div className="library-likedsongs">
                                     <div>

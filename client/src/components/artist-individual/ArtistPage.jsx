@@ -6,7 +6,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import MusicPlayer from "../Music-player/MusicPlayer";
 import { useDispatch, useSelector } from "react-redux";
-import { addSongsforMusicPlayer } from "../../redux/redux-files/counterlist";
+import { PlayCurrentSong, addSongsforMusicPlayer } from "../../redux/redux-files/counterlist";
 
 export default function ArtistPage() {
 
@@ -86,7 +86,7 @@ export default function ArtistPage() {
                                     <div className="playlist-line" />
                                     {artistdata && artistdata.Music.length > 0 ? (
                                         artistdata.Music.map((playlist, index) => (
-                                            <div className="playlist-song-area-2" key={playlist.id} onClick={() => dispatch(addSongsforMusicPlayer(artistdata.Music))}>
+                                            <div className="playlist-song-area-2" key={playlist.id} onClick={() => { dispatch(addSongsforMusicPlayer(artistdata.Music)); dispatch(PlayCurrentSong(index)); }}>
                                                 <div>{index + 1}</div>
                                                 <div className="library-likedsongs playlist-song-list">
                                                     <div>

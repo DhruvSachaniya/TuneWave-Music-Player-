@@ -17,7 +17,7 @@
 .music-player .library-likedsongs {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    column-gap: 15px;
     font-size: small;
 }
 

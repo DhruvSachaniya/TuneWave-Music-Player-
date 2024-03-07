@@ -1,19 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import MusicPlayer from "../../components/Music-player/MusicPlayer";
 
 export const counterList = createSlice({
     name: "musiclist",
     initialState: {
-        value: []
+        value: [],
+        currentvalue: 0
     },
     reducers: {
         addSongsforMusicPlayer: (state, action) => {
             state.value = action.payload;
-            console.log(state.value);
+        },
+        PlayCurrentSong: (state, action) => {
+            state.currentvalue = action.payload;
         }
     }
 });
 
-export const { addSongsforMusicPlayer } = counterList.actions;
+export const { addSongsforMusicPlayer, PlayCurrentSong } = counterList.actions;
 
 export default counterList.reducer;

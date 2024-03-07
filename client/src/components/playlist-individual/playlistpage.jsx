@@ -4,11 +4,16 @@ import Footer from "../Footer/Footer";
 import FirstSection from "../second-compo/firstsection";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import MusicPlayer from "../Music-player/MusicPlayer";
+import { PlayCurrentSong, addSongsforMusicPlayer } from "../../redux/redux-files/counterlist";
 
 export default function PlaylistPage() {
     const { playlistId } = useParams();
     const [playlistdata, setPlaylistData] = useState(null);
+
+    const count = useSelector(state => state.counterList.state)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         async function fetchPlaylistData() {
@@ -62,11 +67,11 @@ export default function PlaylistPage() {
                             <div className="playlist-line" />
                             {/* second for the data */}
                             {playlistdata.musics.map((playlist, index) => (
-                                <div className="playlist-song-area-2" key={playlist.id}>
+                                <div className="playlist-song-area-2" key={playlist.id} onClick={() => { dispatch(addSongsforMusicPlayer(playlistdata.musics)); dispatch(PlayCurrentSong(index)); }}>
                                     <div>{index + 1}</div>
                                     <div className="library-likedsongs playlist-song-list">
                                         <div>
-                                            <img style={{ width: "40px" }} src="https://misc.scdn.co/liked-songs/liked-songs-300.png" alt="liked_song" />
+                                            <img style={{ width: "40px" }} src={`http://localhost:3333/uploads/music_photos/${encodeURIComponent(playlist.music_photo)}`} alt="liked_song" />
                                         </div>
                                         <div>
                                             <h3>{playlist.name}</h3>

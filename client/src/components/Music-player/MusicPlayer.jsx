@@ -168,43 +168,85 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { PlayCurrentSong } from '../../redux/redux-files/counterlist';
 
 export default function MusicPlayer() {
 
     const count = useSelector(state => state.counterList.value);
+    const currentvalue = useSelector(state => state.counterList.currentvalue);
+    const dispatch = useDispatch();
+    // console.log(currentvalue);
+
     const [musicData, setMusicData] = useState([]);
+    const [musicimage, setMusicImage] = useState([]);
+    const [musictitle, setMusicTitle] = useState([]);
+    const [musicdescription, setMusicDescription] = useState([]);
+
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(0.5);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
+
     const audioRef = useRef(null);
+    const imageRef = useRef(null);
+    const titleRef = useRef(null);
+    const descriptionRef = useRef(null);
+
+    // set the Image, name of song , description of music
 
     useEffect(() => {
+        setCurrentTrackIndex(currentvalue);
         const audioFile = count.map(item => "http://localhost:3333/uploads/audio_file/" + item.audio_file);
+        const imageFile = count.map(item => "http://localhost:3333/uploads/music_photos/" + item.music_photo)
+        const titleFile = count.map(item => item.name)
+        const descriptionFile = count.map(item => item.description)
+
         setMusicData(audioFile);
-    }, [count]);
+        setMusicImage(imageFile);
+        setMusicTitle(titleFile);
+        setMusicDescription(descriptionFile);
+    }, [count, currentvalue]);
 
     useEffect(() => {
         if (musicData && musicData.length > 0) {
+            // console.log(currentTrackIndex);
             loadTrack(musicData[currentTrackIndex]);
+            loadImage(musicimage[currentTrackIndex]);
+            loadTitle(musictitle[currentTrackIndex]);
+            loadDescription(musicdescription[currentTrackIndex]);
         }
-    }, [musicData, currentTrackIndex]);
+    }, [musicData, musicimage, musictitle, musicdescription, currentTrackIndex]);
 
     const loadTrack = (audioFile) => {
         audioRef.current.src = audioFile;
         audioRef.current.load();
     };
 
+    const loadImage = (musicImage) => {
+        imageRef.current.src = musicImage;
+    }
+
+    const loadTitle = (musicTitle) => {
+        titleRef.current.textContent = musicTitle;
+    }
+
+    const loadDescription = (musicDescription) => {
+        descriptionRef.current.textContent = musicDescription;
+    }
+
     const playNextTrack = () => {
         if (currentTrackIndex < musicData.length - 1) {
-            setCurrentTrackIndex(currentTrackIndex + 1);
+            // setCurrentTrackIndex(currentTrackIndex + 1);
+            dispatch(PlayCurrentSong(currentvalue + 1));
         }
     };
 
     const playPreviousTrack = () => {
+        console.log(currentTrackIndex);
         if (currentTrackIndex > 0) {
-            setCurrentTrackIndex(currentTrackIndex - 1);
+            // setCurrentTrackIndex(currentTrackIndex - 1);
+            dispatch(PlayCurrentSong(currentvalue - 1));
         }
     };
 
@@ -256,19 +298,41 @@ export default function MusicPlayer() {
 
     return (
         <div className="music-player">
-            <div className="library-likedsongs">
+            <div className="library-likedsongs" style={{ alignItems: "center"}}>
                 <div>
-                    <img src="https://misc.scdn.co/liked-songs/liked-songs-300.png" alt="liked_song" />
+                    {count.length > 0 ? (
+                        <img ref={imageRef} alt="liked_song" />
+                    ) : (
+                        <img src="https://misc.scdn.co/liked-songs/liked-songs-300.png" alt="liked_song" />
+                    )}
                 </div>
                 <div style={{
                     display: "flex",
                     flexDirection: "column",
                     gap: "5px"
                 }}>
-                    <h3>song name</h3>
-                    <div className="library-likedsongs-2">
-                        <p>song description</p>
-                    </div>
+                    {count.length > 0 ? (
+                        <>
+                            <h3 ref={titleRef}></h3>
+                            <div className="library-likedsongs-2">
+                                <p ref={descriptionRef}></p>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <h3>title</h3>
+                            <div className="library-likedsongs-2">
+                                <p>description</p>
+                            </div>
+                        </>
+                    )}
+                </div>
+                <div style={{
+                    display: 'flex',
+                    alignItems: "center"
+                }}>
+                    <i class="fa-regular fa-heart fa-xl"></i>
+                    {/* <i class="fa-solid fa-heart fa-xl"></i> */}
                 </div>
             </div>
             <div style={{
@@ -291,7 +355,9 @@ export default function MusicPlayer() {
                         <i className="fa fa-step-forward fa-lg"></i>
                     </div>
                 </div>
-                <div className="slider_container">
+                <div className="slider_container" style={{
+                    width: "600px"
+                }}>
                     <div className="current-time">{formatTime(currentTime)}</div>
                     <input type="range" min="0" max={duration} value={currentTime} className="seek_slider" onChange={handleSeek} />
                     <div className="total-duration">{formatTime(duration)}</div>

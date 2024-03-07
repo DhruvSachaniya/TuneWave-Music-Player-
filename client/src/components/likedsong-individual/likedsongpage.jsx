@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import MusicPlayer from "../Music-player/MusicPlayer";
-import { addSongsforMusicPlayer } from "../../redux/redux-files/counterlist";
+import { PlayCurrentSong, addSongsforMusicPlayer } from "../../redux/redux-files/counterlist";
 
 export default function LikedSongPage() {
     const [likedsongdata, setLikedsongdata] = useState(null);
@@ -103,7 +103,7 @@ export default function LikedSongPage() {
                                 <div className="playlist-line" />
                                 {likedsongdata && likedsongmusic && likedsongmusic.length > 0 ? (
                                 likedsongmusic[0].map((playlist, index) => (
-                                    <div className="playlist-song-area-2" key={playlist.id} onClick={() => dispatch(addSongsforMusicPlayer(likedsongmusic[0]))}>
+                                    <div className="playlist-song-area-2" key={playlist.id} onClick={() => { dispatch(addSongsforMusicPlayer(likedsongmusic[0])); dispatch(PlayCurrentSong(index)); }}>
                                         <div>{index + 1}</div>
                                         <div className="library-likedsongs playlist-song-list">
                                             <div>
