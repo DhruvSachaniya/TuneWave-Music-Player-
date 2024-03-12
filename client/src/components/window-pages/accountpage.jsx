@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import Footer from "../Footer/Footer";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AccountPage() {
 
+    const navigate = useNavigate();
     const [vendordata, setVendorData] = useState(null);
 
     useEffect(() => {
         async function getVendorData() {
-            console.log("hii")
             const role = localStorage.getItem("role");
             try {
                 let url = "";
@@ -43,10 +44,17 @@ export default function AccountPage() {
                     <h1>Music-Player</h1>
                 </div>
                 <div className="accountpage-navbar-2">
-                    <span style={{ fontSize: "45px" }} class="material-symbols-sharp">
-                        account_circle
-                    </span>
-                    <p>Profile</p>
+                    <div style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center"
+                    }}>
+
+                        <span style={{ fontSize: "45px" }} class="material-symbols-sharp">
+                            account_circle
+                        </span>
+                        <p>Profile</p>
+                    </div>
                 </div>
             </div>
             <div className="accountpage-small">
@@ -54,7 +62,7 @@ export default function AccountPage() {
                     <div>
                         <p>Your plan</p>
                         {vendordata && vendordata.role ? (
-                            <h2>TuneWave {vendordata.role }</h2>
+                            <h2>TuneWave {vendordata.role}</h2>
                         ) : null}
                         <div style={{
                             position: "absolute",
@@ -71,7 +79,156 @@ export default function AccountPage() {
                     <div>
                         <h3>Account</h3>
                     </div>
-                    <div></div>
+                    {vendordata && vendordata.role === "artist" ? (
+                        <>
+                            <div className="accountpage-settings-field" onClick={() => navigate("/uploadmusic")}>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    gap: "5px"
+                                }}>
+                                    <div style={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        gap: "10px"
+                                    }}>
+                                        <span class="material-symbols-outlined">
+                                            upload
+                                        </span>
+                                        <h3>Upload Music</h3>
+                                    </div>
+                                    <div>
+                                        <span class="material-symbols-outlined">
+                                            arrow_forward_ios
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                gap: "5px"
+                            }} onContextMenu={(e) => {
+                                e.preventDefault(); // prevent the default behaviour when right clicked
+                                console.log("Right Click");
+                            }}>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: "10px"
+                                }}>
+                                    <span class="material-symbols-sharp">
+                                        edit
+                                    </span>
+                                    <h3>Edit Profile</h3>
+                                </div>
+                                <span class="material-symbols-outlined">
+                                    arrow_forward_ios
+                                </span>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                gap: "5px"
+                            }}>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: "10px"
+                                }}>
+                                    <span class="material-symbols-outlined">
+                                        manage_accounts
+                                    </span>
+                                    <h3>Manage you Plan</h3>
+                                </div>
+                                <span class="material-symbols-outlined">
+                                    arrow_forward_ios
+                                </span>
+                            </div>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                gap: "5px"
+                            }}>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: "10px"
+                                }}>
+                                    <span class="material-symbols-sharp">
+                                        help_center
+                                    </span>
+                                    <h3>Account Settings</h3>
+                                </div>
+                                <span class="material-symbols-outlined">
+                                    arrow_forward_ios
+                                </span>
+                            </div>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                gap: "5px"
+                            }}>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: "10px"
+                                }}>
+                                    <span class="material-symbols-sharp">
+                                        Home
+                                    </span>
+                                    <h3>Address</h3>
+                                </div>
+                                <span class="material-symbols-outlined">
+                                    arrow_forward_ios
+                                </span>
+                            </div>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                gap: "5px"
+                            }} onContextMenu={(e) => {
+                                e.preventDefault(); // prevent the default behaviour when right clicked
+                                console.log("Right Click");
+                            }}>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: "10px"
+                                }}>
+                                    <span class="material-symbols-sharp">
+                                        edit
+                                    </span>
+                                    <h3>Edit Profile</h3>
+                                </div>
+                                <span class="material-symbols-outlined">
+                                    arrow_forward_ios
+                                </span>
+                            </div>
+                        </>
+                    )}
+
                 </div>
                 <div className="accountpage-help">
                     <div>

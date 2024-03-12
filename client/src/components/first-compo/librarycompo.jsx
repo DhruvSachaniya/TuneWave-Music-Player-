@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CreatePlaylistForm from "../buttons/createplyalist";
 import { Link, useNavigate } from "react-router-dom";
+import PlaylistRightClickWindow from "../buttons/RightClickPlaylist";
 
 export default function LibrarySection() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -10,6 +11,8 @@ export default function LibrarySection() {
     const [likedSongCount, setLikedSongCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [isCreatePlaylistOpen, setIsCreatePlaylistOpen] = useState(false);
+    const [isAccountWindowVisible, setIsAccountWindowVisible] = useState(false);
+    const [PlaylistId, setPlaylistId] = useState();
 
     const navigate = useNavigate();
 
@@ -77,6 +80,10 @@ export default function LibrarySection() {
         setIsCreatePlaylistOpen(false);
     };
 
+    const handleRightClick = () => {
+        setIsAccountWindowVisible(!isAccountWindowVisible);
+    };
+
     return (
         <div className="librarysection">
             <div className="librarysection-1">
@@ -137,6 +144,10 @@ export default function LibrarySection() {
                         {vendordata.Artist_Playlist.map((playlist) => (
                             <div className="librarysection-4" key={playlist.id} onClick={() => {
                                 navigate(`/playlist/${playlist.id}`);
+                            }} onContextMenu={(e) => {
+                                e.preventDefault();
+                                handleRightClick();
+                                setPlaylistId(playlist.id)
                             }}>
                                 <div className="library-likedsongs">
                                     <div>
@@ -162,6 +173,11 @@ export default function LibrarySection() {
                         {vendordata.User_Playlist.map((playlist) => (
                             <div className="librarysection-4" key={playlist.id} onClick={() => {
                                 navigate(`/playlist/${playlist.id}`)
+                            }} onContextMenu={(e) => {
+                                e.preventDefault();
+                                // console.log("Right Click");
+                                handleRightClick()
+                                setPlaylistId(playlist.id);
                             }}>
                                 <div className="library-likedsongs">
                                     <div>
@@ -181,6 +197,8 @@ export default function LibrarySection() {
                         ))}
                     </>
                 )}
+                {/* <PlaylistRightClickWindow/> */}
+            {isLoggedIn && isAccountWindowVisible && <PlaylistRightClickWindow id={PlaylistId}/> }
             </div>
             <div className="librarysection-2">
                 <p>🌐English</p>

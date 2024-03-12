@@ -33,7 +33,12 @@
     flex-direction: row;
     align-items: center;
     color: white;
-    gap: 10px;
+    gap: 5px;
+}
+
+.accountpage-navbar-2 :hover {
+    color: red;
+    cursor: pointer;
 }
 
 .accountpage-small {
@@ -71,9 +76,17 @@
     background-color: #242424;
     height: 15rem;
     width: 100%;
+    flex-direction: column;
     margin-top: 2.5rem;
     padding: 0.5rem;
+    gap: 20px;
     border-radius: 5px;
+}
+
+.accountpage-settings-field :hover {
+    background-color: #121212;
+    cursor: pointer;
+    padding: 0.2rem;
 }
 
 .accountpage-help {

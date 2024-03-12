@@ -169,18 +169,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { PlayCurrentSong } from '../../redux/redux-files/counterlist';
+import AddToLikedSongFunction from '../buttons/AddtoLIkedSong';
 
 export default function MusicPlayer() {
 
     const count = useSelector(state => state.counterList.value);
     const currentvalue = useSelector(state => state.counterList.currentvalue);
     const dispatch = useDispatch();
-    // console.log(currentvalue);
+    // console.log(count);
 
     const [musicData, setMusicData] = useState([]);
     const [musicimage, setMusicImage] = useState([]);
     const [musictitle, setMusicTitle] = useState([]);
     const [musicdescription, setMusicDescription] = useState([]);
+    const [musicid, setMusicId] = useState([]);
 
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -192,8 +194,7 @@ export default function MusicPlayer() {
     const imageRef = useRef(null);
     const titleRef = useRef(null);
     const descriptionRef = useRef(null);
-
-    // set the Image, name of song , description of music
+    const idRef = useRef(null);
 
     useEffect(() => {
         setCurrentTrackIndex(currentvalue);
@@ -201,11 +202,13 @@ export default function MusicPlayer() {
         const imageFile = count.map(item => "http://localhost:3333/uploads/music_photos/" + item.music_photo)
         const titleFile = count.map(item => item.name)
         const descriptionFile = count.map(item => item.description)
+        const music_id = count.map(item => item.id)
 
         setMusicData(audioFile);
         setMusicImage(imageFile);
         setMusicTitle(titleFile);
         setMusicDescription(descriptionFile);
+        setMusicId(music_id);
     }, [count, currentvalue]);
 
     useEffect(() => {
@@ -215,6 +218,7 @@ export default function MusicPlayer() {
             loadImage(musicimage[currentTrackIndex]);
             loadTitle(musictitle[currentTrackIndex]);
             loadDescription(musicdescription[currentTrackIndex]);
+            loadId(musicid[currentTrackIndex]);
         }
     }, [musicData, musicimage, musictitle, musicdescription, currentTrackIndex]);
 
@@ -235,6 +239,10 @@ export default function MusicPlayer() {
         descriptionRef.current.textContent = musicDescription;
     }
 
+    const loadId = (musicId) => {
+        idRef.current = musicId;
+    }
+
     const playNextTrack = () => {
         if (currentTrackIndex < musicData.length - 1) {
             // setCurrentTrackIndex(currentTrackIndex + 1);
@@ -243,7 +251,6 @@ export default function MusicPlayer() {
     };
 
     const playPreviousTrack = () => {
-        console.log(currentTrackIndex);
         if (currentTrackIndex > 0) {
             // setCurrentTrackIndex(currentTrackIndex - 1);
             dispatch(PlayCurrentSong(currentvalue - 1));
@@ -327,10 +334,10 @@ export default function MusicPlayer() {
                         </>
                     )}
                 </div>
-                <div style={{
+                <div className='add-to-likedsong' style={{
                     display: 'flex',
                     alignItems: "center"
-                }}>
+                }} onClick={() => AddToLikedSongFunction(idRef.current)}>
                     <i class="fa-regular fa-heart fa-xl"></i>
                     {/* <i class="fa-solid fa-heart fa-xl"></i> */}
                 </div>

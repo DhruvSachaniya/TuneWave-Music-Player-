@@ -9,6 +9,7 @@ import PlyalistPage from "./components/playlist-individual/playlistpage";
 import LikedSongPage from "./components/likedsong-individual/likedsongpage";
 import ArtistPage from "./components/artist-individual/ArtistPage";
 import AccountPage from "./components/window-pages/accountpage";
+import UploadMusicPage from "./components/window-pages/UploadMusic";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
           <Route exact path="/playlist/:playlistId" element={<PlyalistPage />} />
           <Route path="/likedsongs" element={<LikedSongPage />} />
           <Route exact path="/artist/:artistId" element={<ArtistPage />} />
-          <Route path="/account-overview" element={<AccountPage/>} />
+          <Route path="/account-overview" element={<AccountPage />} />
+          <Route path="/uploadmusic" element={<UploadMusicPage />} />
         </Routes>
       </BrowserRouter>
       <Toaster

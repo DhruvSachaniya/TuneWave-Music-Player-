@@ -67,7 +67,7 @@ export class ArtistController {
     @Delete("playlist")
     async deleteartistplaylist(
         @Request() req,
-        @Body("aritst_playlist_id") artist_playlist_id: number 
+        @Body("playlist_id") artist_playlist_id: number 
     ) : Promise<any> {
         return await this.artistservice.deleteplaylist(req.user, artist_playlist_id);
     }

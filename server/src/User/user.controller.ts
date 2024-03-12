@@ -33,7 +33,7 @@ export class UserController {
     @Delete("playlist")
     async deleteplaylist (
         @Request() req, 
-        @Body("user_playlist_id") user_playlist_id: number
+        @Body("playlist_id") user_playlist_id: number
     ): Promise<any> {
         return await this.userservice.deleteplaylist(req.user ,user_playlist_id);
     }

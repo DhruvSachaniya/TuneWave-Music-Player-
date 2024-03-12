@@ -107,3 +107,7 @@ i.fa-step-forward,
 i.fa-step-backward {
     cursor: pointer;
 }
+
+.add-to-likedsong :hover {
+    cursor: pointer;
+}
