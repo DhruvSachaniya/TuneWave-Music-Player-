@@ -89,7 +89,7 @@ export class ArtistController {
     @Post("addmusic")
     async addmusictoplaylist(
         @Request() req,
-        @Body("artist_playlist_id") artist_playlist_id: number,
+        @Body("playlist_id") artist_playlist_id: number,
         @Body("music_id") music_id: number
     ) : Promise<any> {
         const dto : PlaylistMusicDto = {
@@ -104,7 +104,7 @@ export class ArtistController {
     @Delete("removemusic")
     async removemusicplaylist(
         @Request() req,
-        @Body("artist_playlist_id") artist_playlist_id: number,
+        @Body("playlist_id") artist_playlist_id: number,
         @Body("music_id") music_id: number
         ) : Promise<any> {
 

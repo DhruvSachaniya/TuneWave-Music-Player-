@@ -7,10 +7,13 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import MusicPlayer from "../Music-player/MusicPlayer";
 import { PlayCurrentSong, addSongsforMusicPlayer } from "../../redux/redux-files/counterlist";
+import PlaylistEllipsisWindow from "../buttons/PlaylistEllipsiswindow";
 
 export default function PlaylistPage() {
     const { playlistId } = useParams();
     const [playlistdata, setPlaylistData] = useState(null);
+    const [isAccountWindowVisible, setIsAccountWindowVisible] = useState(false);
+    const [SongId, setSongId] = useState();
 
     const count = useSelector(state => state.counterList.state)
     const dispatch = useDispatch()
@@ -45,6 +48,11 @@ export default function PlaylistPage() {
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
 
+    const handleUserEllipsisClick = (id) => {
+        setSongId(id);
+        setIsAccountWindowVisible(!isAccountWindowVisible);
+    };
+
     return (
         <div className="container">
             <FirstCompo />
@@ -62,7 +70,11 @@ export default function PlaylistPage() {
                                 <div style={{ marginLeft: "10px" }}>title</div>
                                 <div>album</div>
                                 <div>date</div>
-                                <div>time</div>
+                                <div>
+                                    <span class="material-symbols-outlined">
+                                        timelapse
+                                    </span>
+                                </div>
                             </div>
                             <div className="playlist-line" />
                             {/* second for the data */}
@@ -82,16 +94,22 @@ export default function PlaylistPage() {
                                     </div>
                                     <div>{playlist.ArtistId}</div>
                                     <div>{formatDate(playlist.createdAt)}</div>
-                                    <div>time</div>
+                                    <div className="playlist-song-area-2-timer">
+                                        <div>time</div>
+                                        <div onClick={() => handleUserEllipsisClick(playlist.id)}>
+                                            <i class="fa-solid fa-ellipsis"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             ))}
+                        {isAccountWindowVisible && <PlaylistEllipsisWindow playlistid={playlistId} songId={SongId}/>}
                         </div>
                     </div>
                 </div>
                 {/* Render playlist content here */}
                 <Footer />
             </div>
-            <MusicPlayer/>
+            <MusicPlayer />
         </div>
     );
 }

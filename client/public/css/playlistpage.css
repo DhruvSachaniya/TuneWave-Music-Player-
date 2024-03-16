@@ -14,6 +14,7 @@
 .playlist-song-area-1 {
     display: grid;
     grid-template-columns: [index] var(--tracklist-index-column-width, 16px) [first] minmax(120px,var(--col1, 6fr)) [var1] minmax(120px,var(--col2, 4fr)) [var2] minmax(120px,var(--col3, 3fr)) [last] minmax(120px,var(--col4, 1fr));
+    /* grid-template-columns: [ index ] var(--tracklist-index-column-width, 16px) [ first ] minmax(120px, var(--col1, 6fr)) [ var1 ] minmax(120px, var(--col2, 4fr)) [ var2 ] minmax(120px, var(--col3, 3fr)) [ var3 ] minmax(120px, var(--col3, 3fr)) [ last ] minmax(20px, var(--col5, 1fr)); */
 }
 
 .playlist-line {
@@ -32,6 +33,7 @@
     margin-top: 1.5rem;
     display: grid;
     grid-template-columns: [index] var(--tracklist-index-column-width, 16px) [first] minmax(120px,var(--col1, 6fr)) [var1] minmax(120px,var(--col2, 4fr)) [var2] minmax(120px,var(--col3, 3fr)) [last] minmax(120px,var(--col4, 1fr));
+    /* grid-template-columns: [ index ] var(--tracklist-index-column-width, 16px) [ first ] minmax(120px, var(--col1, 6fr)) [ var1 ] minmax(120px, var(--col2, 4fr)) [ var2 ] minmax(120px, var(--col3, 3fr)) [ var3 ] minmax(120px, var(--col3, 3fr)) [ last ] minmax(20px, var(--col5, 1fr)); */
     align-items: center;
     padding: 0 10px;
 }
@@ -47,4 +49,11 @@
 .playlist-song-area-2:hover {
     background-color: #292929;
     cursor: pointer;
+}
+
+.playlist-song-area-2-timer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
 }

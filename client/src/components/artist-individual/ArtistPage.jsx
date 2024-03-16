@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import MusicPlayer from "../Music-player/MusicPlayer";
 import { useDispatch, useSelector } from "react-redux";
 import { PlayCurrentSong, addSongsforMusicPlayer } from "../../redux/redux-files/counterlist";
+import EllipsisWindow from "../buttons/EllipsisWindow";
 
 export default function ArtistPage() {
 
@@ -14,6 +15,8 @@ export default function ArtistPage() {
     const [artistdata, setartistData] = useState(null);
     const [countartistsongs, setcountartistsongs] = useState(0);
     const [artistimage, setartistimage] = useState("");
+    const [isAccountWindowVisible, setIsAccountWindowVisible] = useState(false);
+    const [SongId, setSongId] = useState();
 
     const count = useSelector(state => state.counterList.value)
     const dispatch = useDispatch()
@@ -41,6 +44,11 @@ export default function ArtistPage() {
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "short", day: "numeric" };
         return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
+    const handleUserEllipsisClick = (id) => {
+        setSongId(id);
+        setIsAccountWindowVisible(!isAccountWindowVisible);
     };
 
     return (
@@ -81,7 +89,11 @@ export default function ArtistPage() {
                                         <div style={{ marginLeft: "10px" }}>title</div>
                                         <div>album</div>
                                         <div>date</div>
-                                        <div>time</div>
+                                        <div>
+                                            <span class="material-symbols-outlined">
+                                                timelapse
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="playlist-line" />
                                     {artistdata && artistdata.Music.length > 0 ? (
@@ -101,12 +113,18 @@ export default function ArtistPage() {
                                                 </div>
                                                 <div>{playlist.ArtistId}</div>
                                                 <div>{formatDate(playlist.createdAt)}</div>
-                                                <div>time</div>
+                                                <div className="playlist-song-area-2-timer">
+                                                    <div>time</div>
+                                                    <div onClick={() => handleUserEllipsisClick(playlist.id)}>
+                                                        <i class="fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
                                             </div>
                                         ))
                                     ) : (
                                         <p>No songs found by artist.</p>
                                     )}
+                                {isAccountWindowVisible && <EllipsisWindow songId={SongId} page={"artistpage"}/>}
                                 </div>
                             </div>
                         </div>

@@ -52,7 +52,7 @@ export class UserController {
     @Post("addmusic")
     async addmusictoplaylist(
         @Request() req,
-        @Body("user_playlist_id") user_playlist_id: number,
+        @Body("playlist_id") user_playlist_id: number,
         @Body("music_id") music_id: number
     ): Promise<any> {
         const dto: musicdto = {
@@ -67,7 +67,7 @@ export class UserController {
     @Delete("deletemusic")
     async deletefromplaylist(
         @Request() req,
-        @Body("user_playlist_id") user_playlist_id: number,
+        @Body("playlist_id") user_playlist_id: number,
         @Body("music_id") music_id: number
     ): Promise<any> {
         const dto: musicdto = {
