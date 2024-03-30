@@ -38,16 +38,26 @@ export class pagesservice {
         try {
             const finduserplaylist = await this.prisma.user_Playlist.findMany({
                 where: {
-                    name: query
+                    name: {
+                        contains: query,
+                        mode: "insensitive"
+                    }
+                }, include: {
+                    musics: true
                 }
             })
 
             const findartistplaylist = await this.prisma.artist_Playlist.findMany({
                 where: {
-                    name: query
+                    name: {
+                        contains: query,
+                        mode: "insensitive"
+                    }
+                }, include: {
+                    musics: true
                 }
             })
-
+            
             if(!finduserplaylist || !findartistplaylist) {
                 throw new HttpException("failed to find playlist!", HttpStatus.BAD_REQUEST);
             }

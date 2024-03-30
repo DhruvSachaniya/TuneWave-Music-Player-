@@ -1,11 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios"
+import { useSelector, useDispatch } from 'react-redux';
+import { changeinputvalue } from "../../../redux/redux-files/countersearch";
 
 export default function FirstSearchSection() {
     const navigate = useNavigate()
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [values, setvalues] = useState({
+        searchinput: ""
+    });
+
+    const dispatch = useDispatch();
+    const input_value = useSelector(state => state.counterSearch.input);
+
+    async function onChange(event) {
+        const { name, value } = event.target;
+
+        setvalues({
+            ...values,
+            [name]: value
+        })
+        dispatch(changeinputvalue(values.searchinput))
+    }
 
     useEffect(() => {
         async function checklogin() {
@@ -68,7 +86,12 @@ export default function FirstSearchSection() {
                             <span class="material-symbols-sharp search-input-icon">
                                 search
                             </span>
-                            <input type="text" placeholder="what do you want to play!" />
+                            <input name="searchinput"
+                                value={values.searchinput}
+                                onChange={onChange}
+                                type="text"
+                                placeholder="what do you want to play!"
+                            />
                         </div>
                         {/* search input field will come here */}
                     </div>
