@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 export default function SecondSearchSection() {
 
@@ -13,33 +14,40 @@ export default function SecondSearchSection() {
     // playlist data by searching
     useEffect(() => {
         async function fetchPlaylist() {
-
-            const response = await axios({
-                url: `/searchplaylist?query=${input_value}`,
-                method: "GET",
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("jwt_token")
-                }
-            })
-            if(response) {
-                setPlaylistResponse(response.data);
+            try {
                 
-                if(response.status === 201) {
-                    if(response.data.playlist.findartistplaylist) {
-                        const data_1 = playlistresponse.playlist.findartistplaylist.map(item => item.musics);
-                        
-                        setArtistMusics(data_1);
-                    } 
-                    if(response.data.playlist.finduserplaylist.legnth >= 1) {
-                        const data_2 = playlistresponse.playlist.finduserplaylist.map(item => item.musics)
-                        
-                        setUserMusics(data_2);
+                const response = await axios({
+                    url: `/searchplaylist?query=${input_value}`,
+                    method: "GET",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("jwt_token")
                     }
-                }
+                })
+                if(response) {
+                    setPlaylistResponse(response.data);
                     
+                    if(response.status === 200) {
+                        if(await response.data.playlist.findartistplaylist.length >= 1) {
+                            console.log(await response.data.playlist.findartistplaylist[0].name);
+                            const data_1 = await playlistresponse.playlist.findartistplaylist.map(item => item.musics);
+                            
+                            setArtistMusics(data_1);
+                        } 
+                        if(await response.data.playlist.finduserplaylist.legnth >= 1) {
+                            const data_2 = await playlistresponse.playlist.finduserplaylist.map(item => item.musics)
+                            
+                            setUserMusics(data_2);
+                        }
+                    }
+                    
+                }
+            } catch(error) {
+                if(error) {
+                    toast.error("error! ")
+                }
             }
         }
-
+        
         fetchPlaylist()
     }, [input_value])
 
@@ -54,8 +62,9 @@ export default function SecondSearchSection() {
                 }
             })
             if(response) {
-                console.log(response.data);
-                setSongResponse(response.data);
+                if(response.data.length > 1) {
+                    setSongResponse(response.data);
+                }
             }
         }
 
@@ -69,13 +78,15 @@ export default function SecondSearchSection() {
                     <div className="top-result-1">
                         <h2>Top result</h2>
                     </div>
+                    {artistmusics && artistmusics[0].map((playlist) => ( 
                     <div className="top-result-2">
                         <img style={{ width: "100px" }} src="https://misc.scdn.co/liked-songs/liked-songs-300.png" alt="liked_song" />
-                        <p>name</p>
+                        <p>{playlist.name}</p>
                         <p>created by:</p>
                         {/* playlist image */}
                         {/* playlistname */}
                     </div>
+                    ))}
                 </div>
                 <div className="songs">
                     <div className="songs-1">

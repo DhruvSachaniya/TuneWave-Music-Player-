@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedE
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-local";
 import { prismaservice } from "src/prisma/prisma.service";
+import * as  argon2 from "argon2";
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -23,14 +24,19 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     
 
   async validate(useremail: string, password: string): Promise<any> {
-    console.log("hii")
+    console.log("logged in")
     const user = await this.prismaService.user.findUnique({
         where: {
             email: useremail
         }
     })
 
-    if (user && user.password === password) {
+    if(user) {
+        var match_hash = await argon2.verify(user.password, password);
+    }
+    
+    // if (user && user.password === password) {
+    if(match_hash) {
         const { password, ...result } = user;
         return result;
     }
@@ -43,6 +49,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
         })
 
         if(artist) {
+            // const artist_hash = await argon2.verify(artist.password, password);
             if(artist.password === password) {
                 const {password, ...result} = artist;
                 
