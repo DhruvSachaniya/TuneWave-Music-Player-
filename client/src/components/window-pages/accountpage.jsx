@@ -39,7 +39,15 @@ export default function AccountPage() {
   return (
     <div className="accountpage-container">
       <div className="accountpage-navbar">
-        <div className="accountpage-navbar-1">
+        <div
+          className="accountpage-navbar-1"
+          style={{
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           <img src={"/images/music-player-logo.png"} alt="logo" />
           <h1>Music-Player</h1>
         </div>

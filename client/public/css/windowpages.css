@@ -1,103 +1,102 @@
 .accountpage-container {
-    /* height: fit-content; */
-    min-height: 100vh;
-    background-color: var(#121212, #ffffff);
+  /* height: fit-content; */
+  min-height: 100vh;
+  background-color: var(#121212, #ffffff);
 }
 
 .accountpage-navbar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    /* background: #121212; */
-    height: 13%;
-    padding: 30px;
-    gap: 10px;
-    z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* background: #121212; */
+  height: 13%;
+  padding: 30px;
+  gap: 10px;
+  z-index: 1;
 }
 
 .accountpage-navbar-1 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: white;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  gap: 10px;
 }
 
 .accountpage-navbar-1 img {
-    width: 50px;
+  width: 50px;
 }
 
 .accountpage-navbar-2 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: white;
-    gap: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  gap: 5px;
 }
 
 .accountpage-navbar-2 :hover {
-    color: red;
-    cursor: pointer;
+  color: red;
+  cursor: pointer;
 }
 
 .accountpage-small {
-    display: flex;
-    flex-flow: column;
-    place-content: center flex-start;
-    align-items: flex-start;
-    max-width: 800px;
-    min-height: 800px;
-    margin: 0px auto;
-    padding: 32px 8px;
+  display: flex;
+  flex-flow: column;
+  place-content: center flex-start;
+  align-items: flex-start;
+  max-width: 800px;
+  min-height: 800px;
+  margin: 0px auto;
+  padding: 32px 8px;
 }
 
 .accountpage-navbar-3 {
-    position: relative;
-    margin-top: 30px;
-    display: flex;
-    color: white;
-    background-color: #242424;
-    height: 15rem;
-    width: 100%;
-    justify-content: space-between;
-    padding: 0.5rem;
-    border-radius: 5px;
-
+  position: relative;
+  margin-top: 30px;
+  display: flex;
+  color: white;
+  background-color: #242424;
+  height: 15rem;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-radius: 5px;
 }
 
 .accountpage-navbar-3 img {
-    width: 30px;
+  width: 30px;
 }
 
 .accountpage-settings {
-    display: flex;
-    color: white;
-    background-color: #242424;
-    height: 15rem;
-    width: 100%;
-    flex-direction: column;
-    margin-top: 2.5rem;
-    padding: 0.5rem;
-    gap: 20px;
-    border-radius: 5px;
+  display: flex;
+  color: white;
+  background-color: #242424;
+  height: 15rem;
+  width: 100%;
+  flex-direction: column;
+  margin-top: 2.5rem;
+  padding: 0.5rem;
+  gap: 20px;
+  border-radius: 5px;
 }
 
 .accountpage-settings-field :hover {
-    background-color: #121212;
-    cursor: pointer;
-    padding: 0.2rem;
+  background-color: #121212;
+  cursor: pointer;
+  /* padding: 0.2rem; */
 }
 
 .accountpage-help {
-    display: flex;
-    flex-direction: column;
-    color: white;
-    background-color: #242424;
-    height: auto;
-    width: 100%;
-    margin-top: 2.5rem;
-    padding: 0.5rem;
-    gap: 20px;
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: #242424;
+  height: auto;
+  width: 100%;
+  margin-top: 2.5rem;
+  padding: 0.5rem;
+  gap: 20px;
+  border-radius: 5px;
 }
