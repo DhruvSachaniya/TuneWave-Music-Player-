@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 services:
   db:
     image: postgres:latest
@@ -8,4 +8,4 @@ services:
       POSTGRES_PASSWORD: Music-Player123
       POSTGRES_DB: Music-Player
     ports:
-      - "5434:5432"
+      - '5434:5432'

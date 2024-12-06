@@ -1,10 +1,9 @@
 export class songdto {
-    
-    name: string;
+  name: string;
 
-    description: string;
+  description: string;
 
-    // audio_file: string;
+  // audio_file: string;
 
-    // music_photo: string;
+  // music_photo: string;
 }

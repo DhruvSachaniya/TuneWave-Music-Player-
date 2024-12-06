@@ -1,5 +1,3 @@
 export class userplaylistdto {
-    
-    name: string;
-
+  name: string;
 }

@@ -1,6 +1,5 @@
 export class musicdto {
+  user_playlist_id: number;
 
-    user_playlist_id: number;
-
-    music_id: number;
+  music_id: number;
 }
